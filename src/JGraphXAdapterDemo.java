@@ -1,4 +1,5 @@
 import com.mxgraph.layout.*;
+import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.*;
 import org.jgrapht.*;
 import org.jgrapht.ext.*;
@@ -6,6 +7,7 @@ import org.jgrapht.graph.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collection;
 
 /**
  * A demo applet that shows how to use JGraphX to visualize JGraphT graphs. Applet based on
@@ -27,7 +29,7 @@ public class JGraphXAdapterDemo
      * application.
      *
      * @param args command line arguments
-     */
+     *//*
     public static void main(String[] args)
     {
         JGraphXAdapterDemo applet = new JGraphXAdapterDemo();
@@ -46,7 +48,7 @@ public class JGraphXAdapterDemo
     {
         // create a JGraphT graph
         ListenableGraph<String, DefaultEdge> g =
-                new DefaultListenableGraph<>(new DefaultDirectedGraph<>(DefaultEdge.class));
+                new DefaultListenableGraph<>(new SimpleGraph<>(DefaultEdge.class));
 
         // create a visualization using JGraph, via an adapter
         jgxAdapter = new JGraphXAdapter<>(g);
@@ -84,7 +86,14 @@ public class JGraphXAdapterDemo
         layout.setRadius(radius);
         layout.setMoveCircle(true);
 
+        jgxAdapter = new JGraphXAdapter<String, DefaultEdge>(g);
+        mxGraphComponent graphComponent = new mxGraphComponent(jgxAdapter);
+        mxGraphModel graphModel = (mxGraphModel)graphComponent.getGraph().getModel();
+        Collection<Object>
+
+
+
         layout.execute(jgxAdapter.getDefaultParent());
         // that's all there is to it!...
-    }
+    }*/
 }

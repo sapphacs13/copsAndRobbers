@@ -8,7 +8,7 @@ import java.net.*;
 import java.util.*;
 public class App {
     public static void main(String[] args){
-        Graph<URL, DefaultEdge> g = new DefaultDirectedGraph<>(DefaultEdge.class);
+        Graph<URL, DefaultEdge> g = new DefaultUndirectedGraph<>(DefaultEdge.class);
 
        /* URL google = new URL("http://www.google.com");
         URL wikipedia = new URL("http://www.wikipedia.org");

@@ -3,8 +3,10 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
+import com.mxgraph.util.mxRectangle;
 import com.mxgraph.util.mxUtils;
 
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -32,6 +34,7 @@ public class SimplePetersenSim extends JFrame {
     //Win Text Variables
     private final int winTextWidth = 80;
     private final int winTextHeight = 30;
+    private final int radius = 300;
 
     //Variables
     //initial state
@@ -59,6 +62,9 @@ public class SimplePetersenSim extends JFrame {
 
 
         jgxAdapter = new JGraphXAdapter <>(graph);
+        mxRectangle r = new mxRectangle();
+        r.setRect(0,0,1000,750);
+        jgxAdapter.setMinimumGraphSize(r);
         mxGraphComponent graphComponent = new mxGraphComponent(jgxAdapter);
         mxGraphModel graphModel  =       (mxGraphModel)graphComponent.getGraph().getModel();
         Collection<Object> cells =  graphModel.getCells().values();
@@ -71,6 +77,7 @@ public class SimplePetersenSim extends JFrame {
         graphComponent.getGraph().getStylesheet().getDefaultEdgeStyle().put(mxConstants.STYLE_NOLABEL, "1");
         initializeVertices(jgxAdapter);
         mxCircleLayout layout = new mxCircleLayout(jgxAdapter);
+        layout.setRadius(radius);
         layout.execute(jgxAdapter.getDefaultParent());
 
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
@@ -149,6 +156,9 @@ public class SimplePetersenSim extends JFrame {
 
         g.setTitle(" Petersen Graph ");
         g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /*Dimension d = new Dimension();
+        d.setSize(1000,750);
+        g.setMinimumSize(d);*/
         g.pack();
         g.setVisible(true);
     }

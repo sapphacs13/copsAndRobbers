@@ -20,20 +20,22 @@ import org.jgrapht.graph.SimpleGraph;
 public class SimpleTreeSim extends JFrame {
 
     //Constants
-    //Color Variables
-    private final boolean robberChoose = false;
+    //Color Constants
     private final String defaultColor = "white";
     private final String copColor = "9BED55";
     private final String robberColor = "ED6555";
 
-    //Win Text Variables
+    //Win Text Constants
     private final int winTextWidth = 80;
     private final int winTextHeight = 30;
 
-    //Geometry Variables
+    //Geometry Constants
     private final int radius = 300;
 
     //Variables
+    //Color Variables
+    private boolean robberChoose = false;
+
     //Win Text Variables
     private mxCell winText = null;
 

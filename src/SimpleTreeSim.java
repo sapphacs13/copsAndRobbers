@@ -1,17 +1,25 @@
 import com.mxgraph.layout.mxCircleLayout;
+import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxUtils;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Collection;
+import java.util.Set;
 import java.util.function.Supplier;
 import javax.swing.JFrame;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
 public class SimpleTreeSim extends JFrame {
+
+    private boolean colorRed = false;
 
     public SimpleTreeSim(){
 
@@ -49,23 +57,59 @@ public class SimpleTreeSim extends JFrame {
         getContentPane().add(graphComponent);
         //remove edge labels
         graphComponent.getGraph().getStylesheet().getDefaultEdgeStyle().put(mxConstants.STYLE_NOLABEL, "1");
+        initializeVertices(jgxAdapter);
 
         mxCircleLayout layout = new mxCircleLayout(jgxAdapter);
         layout.execute(jgxAdapter.getDefaultParent());
 
+        graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Set<String> vertices = graph.vertexSet();
+                Object cell = graphComponent.getCellAt(e.getX(), e.getY());
+                if (cell != null && cell instanceof mxCell) {
+                    //listening to vertices
+                    String v = ((mxCell)cell).getValue().toString();
+                    if(vertices.contains(((mxCell)cell).getValue().toString())) {
+                        System.out.println(((mxCell) cell).getStyle());
+                        if (colorRed) {
+                            uncolorVertex(jgxAdapter, "red");
+                            jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, "red", new Object[]{cell});
+                        }
+                        else{
+                            uncolorVertex(jgxAdapter, "green");
+                            jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, "green", new Object[]{cell});
+                        }
+                        colorRed = !colorRed;
+                        //uncolor vertices
+                        graphComponent.refresh();
+                        //switch between colors for cop v. robber
+                        //if switching from robber to cop color: game over
+                        System.out.println("click");
+                    }
+                }
+
+            }
+        });
+
     }
 
-    /*
-    public void uncolorSingleVertex(String label) {
-        for(int i=0; i<nodes.size(); i++) {
-            // keeps all the vertices
-            Object o = nodes.get(i);
-            if(graph.getModel().isVertex(o) && graph.getLabel(o).equals(label) ) {
-                mxCell vertex = (mxCell)o;
-                graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#ffffff", new Object[]{vertex});
-            }
+    public void initializeVertices(JGraphXAdapter jgraphx) {
+        Object[] vertices = jgraphx.getChildVertices(jgraphx.getDefaultParent());
+        for (Object v : vertices){
+            mxCell cell = (mxCell) v;
+            jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, "grey", new Object[]{cell});
         }
-    }*/
+    }
+
+    public void uncolorVertex(JGraphXAdapter jgraphx, String color) {
+        Object[] vertices = jgraphx.getChildVertices(jgraphx.getDefaultParent());
+        for (Object v : vertices){
+            mxCell cell = (mxCell) v;
+            if(cell.getStyle().contains(color))
+                jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, "grey", new Object[]{cell});
+        }
+    }
 
     public static void main(String[] args) {
 

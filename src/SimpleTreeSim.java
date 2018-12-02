@@ -9,17 +9,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.Set;
-import java.util.function.Supplier;
 import javax.swing.JFrame;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
 public class SimpleTreeSim extends JFrame {
 
-    private boolean colorRed = false;
+    private boolean robberChoose = false;
+    private String defaultColor = "white";
+    private String copColor = "green";
+    private String robberColor = "red";
+    private int winTextWidth = 80;
+    private int winTextHeight = 30;
+    private mxCell winText = null;
 
     public SimpleTreeSim(){
 
@@ -72,15 +76,26 @@ public class SimpleTreeSim extends JFrame {
                     String v = ((mxCell)cell).getValue().toString();
                     if(vertices.contains(((mxCell)cell).getValue().toString())) {
                         System.out.println(((mxCell) cell).getStyle());
-                        if (colorRed) {
-                            uncolorVertex(jgxAdapter, "red");
-                            jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, "red", new Object[]{cell});
+                        if (robberChoose) {
+                            uncolorVertex(jgxAdapter, robberColor);
+                            jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, robberColor, new Object[]{cell});
                         }
-                        else{
-                            uncolorVertex(jgxAdapter, "green");
-                            jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, "green", new Object[]{cell});
+                        else{ //cop choose
+                            if(winText != null){
+                                jgxAdapter.removeCells(new Object[]{winText});
+                            }
+                            uncolorVertex(jgxAdapter, copColor);
+                            String oldColor = ((mxCell) cell).getStyle();
+                            jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, copColor, new Object[]{cell});
+                            //if cop wins
+                            if(oldColor.contains(robberColor)){
+                                robberChoose = true;
+                                double xCenter = jgxAdapter.getGraphBounds().getCenterX()-winTextWidth/2;
+                                double yCenter = jgxAdapter.getGraphBounds().getCenterY()-winTextHeight/2;
+                                winText = (mxCell) jgxAdapter.insertVertex(jgxAdapter.getDefaultParent(), "winText", "Cop wins!", xCenter, yCenter, winTextWidth, winTextHeight);
+                            }
                         }
-                        colorRed = !colorRed;
+                        robberChoose = !robberChoose;
                         //uncolor vertices
                         graphComponent.refresh();
                         //switch between colors for cop v. robber
@@ -98,7 +113,7 @@ public class SimpleTreeSim extends JFrame {
         Object[] vertices = jgraphx.getChildVertices(jgraphx.getDefaultParent());
         for (Object v : vertices){
             mxCell cell = (mxCell) v;
-            jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, "grey", new Object[]{cell});
+            jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, defaultColor, new Object[]{cell});
         }
     }
 
@@ -107,7 +122,7 @@ public class SimpleTreeSim extends JFrame {
         for (Object v : vertices){
             mxCell cell = (mxCell) v;
             if(cell.getStyle().contains(color))
-                jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, "grey", new Object[]{cell});
+                jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, defaultColor, new Object[]{cell});
         }
     }
 

@@ -1,5 +1,6 @@
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
@@ -61,7 +62,16 @@ public class SimplePetersenSim extends JFrame {
 
 
 
-        jgxAdapter = new JGraphXAdapter <>(graph);
+        jgxAdapter = new JGraphXAdapter <String, DefaultEdge>(graph) {
+            @Override
+            public boolean isCellSelectable(Object cell){
+                mxCell c = (mxCell) cell;
+                if(c.isEdge()){
+                    return false;
+                }
+                return super.isCellSelectable(cell);
+            }
+        };
         mxRectangle r = new mxRectangle();
         r.setRect(0,0,1000,750);
         jgxAdapter.setMinimumGraphSize(r);
@@ -75,9 +85,10 @@ public class SimplePetersenSim extends JFrame {
         getContentPane().add(graphComponent);
         //remove edge labels
         graphComponent.getGraph().getStylesheet().getDefaultEdgeStyle().put(mxConstants.STYLE_NOLABEL, "1");
-        initializeVertices(jgxAdapter);
+        initializeVertices(jgxAdapter, true);
         mxCircleLayout layout = new mxCircleLayout(jgxAdapter);
         layout.setRadius(radius);
+        //jgxAdapter.setPreferred
         layout.execute(jgxAdapter.getDefaultParent());
 
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
@@ -90,7 +101,7 @@ public class SimplePetersenSim extends JFrame {
                         if(initState){
                             //remove win text from last game
                             if(winText != null){
-                                initializeVertices(jgxAdapter);
+                                initializeVertices(jgxAdapter, false);
                                 jgxAdapter.removeCells(new Object[]{winText});
                                 winText = null;
                             }
@@ -142,10 +153,16 @@ public class SimplePetersenSim extends JFrame {
 
     }
 
-    public void initializeVertices(JGraphXAdapter jgraphx) {
+    public void initializeVertices(JGraphXAdapter jgraphx, boolean setSize) {
         Object[] vertices = jgraphx.getChildVertices(jgraphx.getDefaultParent());
         for (Object v : vertices){
             mxCell cell = (mxCell) v;
+            if(setSize) {
+                mxGeometry geo = new mxGeometry();
+                geo.setHeight(25);
+                geo.setWidth(25);
+                cell.setGeometry(geo);
+            }
             jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, defaultColor, new Object[]{cell});
         }
     }

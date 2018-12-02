@@ -30,12 +30,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SimplePetersenSim.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="77" column="39" lean-forward="true" selection-start-line="77" selection-start-column="39" selection-end-line="77" selection-end-column="39" />
+            <state relative-caret-position="202">
+              <caret line="161" column="26" lean-forward="true" selection-start-line="161" selection-start-column="26" selection-end-line="161" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2702#5944#0" expanded="true" />
-                <element signature="e#5943#5944#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,7 +113,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543784684071" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543785953138" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -183,12 +181,12 @@
       <option name="presentableId" value="Default" />
       <updated>1543531085922</updated>
       <workItem from="1543531089589" duration="7959000" />
-      <workItem from="1543771727766" duration="10065000" />
+      <workItem from="1543771727766" duration="11304000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18024000" />
+    <option name="totallyTimeSpent" value="19263000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1170" height="676" extended-state="0" />
@@ -284,12 +282,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SimplePetersenSim.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="77" column="39" lean-forward="true" selection-start-line="77" selection-start-column="39" selection-end-line="77" selection-end-column="39" />
+        <state relative-caret-position="202">
+          <caret line="161" column="26" lean-forward="true" selection-start-line="161" selection-start-column="26" selection-end-line="161" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2702#5944#0" expanded="true" />
-            <element signature="e#5943#5944#0" expanded="true" />
           </folding>
         </state>
       </provider>

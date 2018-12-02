@@ -78,7 +78,6 @@ public class SimplePetersenSim extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 Object cell = graphComponent.getCellAt(e.getX(), e.getY());
                 if (cell != null && cell instanceof mxCell) {
-                    String v = ((mxCell)cell).getValue().toString();
                     Set<String> vertices = graph.vertexSet();
                     if(vertices.contains(((mxCell)cell).getValue().toString())) {
                         if(initState){
@@ -144,33 +143,11 @@ public class SimplePetersenSim extends JFrame {
         }
     }
 
-    public void uncolorVertex(JGraphXAdapter jgraphx, String color) {
-        Object[] vertices = jgraphx.getChildVertices(jgraphx.getDefaultParent());
-        /*
-        for (Object v : vertices){
-            mxCell cell = (mxCell) v;
-            if(cell.getStyle().contains(color))
-                jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, defaultColor, new Object[]{cell});
-        }*/
-    }
-
-    /*
-    public void uncolorSingleVertex(String label) {
-        for(int i=0; i<nodes.size(); i++) {
-            // keeps all the vertices
-            Object o = nodes.get(i);
-            if(graph.getModel().isVertex(o) && graph.getLabel(o).equals(label) ) {
-                mxCell vertex = (mxCell)o;
-                graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "#ffffff", new Object[]{vertex});
-            }
-        }
-    }*/
-
     public static void main(String[] args) {
 
         SimplePetersenSim g = new SimplePetersenSim();
 
-        g.setTitle(" undirected graph ");
+        g.setTitle(" Petersen Graph ");
         g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         g.pack();
         g.setVisible(true);

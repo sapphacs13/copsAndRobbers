@@ -73,7 +73,6 @@ public class SimpleTreeSim extends JFrame {
                 Object cell = graphComponent.getCellAt(e.getX(), e.getY());
                 if (cell != null && cell instanceof mxCell) {
                     //listening to vertices
-                    String v = ((mxCell)cell).getValue().toString();
                     if(vertices.contains(((mxCell)cell).getValue().toString())) {
                         System.out.println(((mxCell) cell).getStyle());
                         if (robberChoose) {
@@ -130,7 +129,7 @@ public class SimpleTreeSim extends JFrame {
 
         SimpleTreeSim g = new SimpleTreeSim();
 
-        g.setTitle(" undirected graph ");
+        g.setTitle(" Finite Tree ");
         g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         g.pack();
         g.setVisible(true);

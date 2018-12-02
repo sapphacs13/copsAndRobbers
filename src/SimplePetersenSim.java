@@ -20,6 +20,29 @@ import org.jgrapht.util.SupplierUtil;
 
 public class SimplePetersenSim extends JFrame {
 
+    //Constants
+    //initial state variables
+    private final int numCops = 3;
+    //color variables
+    private final String defaultColor = "white";
+    private final String copColor = "green";
+    private final String robberColor = "red";
+    private final String nullString = "null";
+    private final String styleColor="fillColor=";
+    //Win Text Variables
+    private final int winTextWidth = 80;
+    private final int winTextHeight = 30;
+
+    //Variables
+    //initial state
+    private boolean initState = true;
+    private int copCount = 0;
+    //color variables
+    private String nextColor = nullString;
+    //win text variables
+    private mxCell winText = null;
+
+
     public SimplePetersenSim(){
 
         JGraphXAdapter<String, DefaultEdge> jgxAdapter;
@@ -46,25 +69,60 @@ public class SimplePetersenSim extends JFrame {
         getContentPane().add(graphComponent);
         //remove edge labels
         graphComponent.getGraph().getStylesheet().getDefaultEdgeStyle().put(mxConstants.STYLE_NOLABEL, "1");
-
+        initializeVertices(jgxAdapter);
         mxCircleLayout layout = new mxCircleLayout(jgxAdapter);
         layout.execute(jgxAdapter.getDefaultParent());
 
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Set<String> vertices = graph.vertexSet();
                 Object cell = graphComponent.getCellAt(e.getX(), e.getY());
                 if (cell != null && cell instanceof mxCell) {
-                    //listening to vertices
                     String v = ((mxCell)cell).getValue().toString();
+                    Set<String> vertices = graph.vertexSet();
                     if(vertices.contains(((mxCell)cell).getValue().toString())) {
-                        System.out.println(((mxCell) cell).getStyle());
-                        jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, "green", new Object[]{cell});
+                        if(initState){
+                            //remove win text from last game
+                            if(winText != null){
+                                initializeVertices(jgxAdapter);
+                                jgxAdapter.removeCells(new Object[]{winText});
+                                winText = null;
+                            }
+                            //color cops
+                            if(copCount < numCops){
+                                jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, copColor, new Object[]{cell});
+                                copCount++;
+                            } else { //color robber
+                                jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, robberColor, new Object[]{cell});
+                                initState = false;
+                            }
+                        } else {
+                            //if first click
+                            if(nextColor.equals(nullString)) {
+                                String style = ((mxCell) cell).getStyle();
+                                //to handle transition between style and color variable
+                                int beginIndexColor = style.indexOf(styleColor) + styleColor.length();
+                                //grab color of vertex
+                                nextColor = style.substring(beginIndexColor);
+                                //reset this vertex
+                                jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, defaultColor, new Object[]{cell});
+                            } else {
+                                String oldColor = ((mxCell) cell).getStyle();
+                                jgxAdapter.setCellStyles(mxConstants.STYLE_FILLCOLOR, nextColor, new Object[]{cell});
+                                if(oldColor.contains(robberColor) && nextColor.equals(copColor)){
+                                    double xCenter = jgxAdapter.getGraphBounds().getCenterX()-winTextWidth/2;
+                                    double yCenter = jgxAdapter.getGraphBounds().getCenterY()-winTextHeight/2;
+                                    winText = (mxCell) jgxAdapter.insertVertex(jgxAdapter.getDefaultParent(), "winText", "Cop wins!", xCenter, yCenter, winTextWidth, winTextHeight);
+                                    //reset for new game
+                                    initState = true;
+                                    copCount=0;
+                                }
+                                nextColor = nullString; //reset next color
+                            }
+                        }
+
                         graphComponent.refresh();
-                        //switch between colors for cop v. robber
-                        //if switching from robber to cop color: game over
-                        System.out.println("click");
+                        //System.out.println("click"); //testing
                     }
                 }
 
@@ -76,6 +134,24 @@ public class SimplePetersenSim extends JFrame {
 
         }*/
 
+    }
+
+    public void initializeVertices(JGraphXAdapter jgraphx) {
+        Object[] vertices = jgraphx.getChildVertices(jgraphx.getDefaultParent());
+        for (Object v : vertices){
+            mxCell cell = (mxCell) v;
+            jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, defaultColor, new Object[]{cell});
+        }
+    }
+
+    public void uncolorVertex(JGraphXAdapter jgraphx, String color) {
+        Object[] vertices = jgraphx.getChildVertices(jgraphx.getDefaultParent());
+        /*
+        for (Object v : vertices){
+            mxCell cell = (mxCell) v;
+            if(cell.getStyle().contains(color))
+                jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, defaultColor, new Object[]{cell});
+        }*/
     }
 
     /*

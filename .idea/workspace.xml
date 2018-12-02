@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72168aae-9f37-4823-9ed1-0e58768f0452" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/SimpleTreeSim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleTreeSim.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SimplePetersenSim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimplePetersenSim.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SimpleTreeSim.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+            <state relative-caret-position="130">
+              <caret line="83" column="28" lean-forward="true" selection-start-line="83" selection-start-column="28" selection-end-line="85" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2419#4696#0" expanded="true" />
@@ -27,15 +27,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SimplePetersenSim.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="71" column="11" lean-forward="true" selection-start-line="52" selection-start-column="8" selection-end-line="71" selection-end-column="11" />
+            <state relative-caret-position="161">
+              <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2018#3085#0" expanded="true" />
-                <element signature="e#3084#3085#0" expanded="true" />
+                <element signature="e#2702#5944#0" expanded="true" />
+                <element signature="e#5943#5944#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,8 +71,8 @@
         <option value="$PROJECT_DIR$/src/App.java" />
         <option value="$PROJECT_DIR$/src/JGraphXAdapterDemo.java" />
         <option value="$PROJECT_DIR$/src/GraphTest.java" />
-        <option value="$PROJECT_DIR$/src/SimplePetersenSim.java" />
         <option value="$PROJECT_DIR$/src/SimpleTreeSim.java" />
+        <option value="$PROJECT_DIR$/src/SimplePetersenSim.java" />
       </list>
     </option>
   </component>
@@ -115,7 +115,8 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543778527601" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543781193663" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -133,7 +134,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SimpleTreeSim">
+  <component name="RunManager" selected="Application.SimplePetersenSim">
     <configuration name="JGraphXAdapterDemo" type="Applet" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="JGraphXAdapterDemo" />
       <module name="copsAndRobbers" />
@@ -164,8 +165,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SimpleTreeSim" />
         <item itemvalue="Application.SimplePetersenSim" />
+        <item itemvalue="Application.SimpleTreeSim" />
         <item itemvalue="Application.GraphTest" />
         <item itemvalue="Applet.JGraphXAdapterDemo" />
       </list>
@@ -182,12 +183,12 @@
       <option name="presentableId" value="Default" />
       <updated>1543531085922</updated>
       <workItem from="1543531089589" duration="7959000" />
-      <workItem from="1543771727766" duration="6362000" />
+      <workItem from="1543771727766" duration="8924000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14321000" />
+    <option name="totallyTimeSpent" value="16883000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1170" height="676" extended-state="0" />
@@ -262,18 +263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SimplePetersenSim.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="71" column="11" lean-forward="true" selection-start-line="52" selection-start-column="8" selection-end-line="71" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2018#3085#0" expanded="true" />
-            <element signature="e#3084#3085#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/src.zip!/java/awt/event/MouseAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
@@ -283,12 +272,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SimpleTreeSim.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+        <state relative-caret-position="130">
+          <caret line="83" column="28" lean-forward="true" selection-start-line="83" selection-start-column="28" selection-end-line="85" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2419#4696#0" expanded="true" />
             <element signature="e#4695#4696#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SimplePetersenSim.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2702#5944#0" expanded="true" />
+            <element signature="e#5943#5944#0" expanded="true" />
           </folding>
         </state>
       </provider>

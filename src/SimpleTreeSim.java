@@ -1,8 +1,10 @@
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
+import com.mxgraph.util.mxRectangle;
 import com.mxgraph.util.mxUtils;
 
 import java.awt.event.MouseAdapter;
@@ -17,20 +19,30 @@ import org.jgrapht.graph.SimpleGraph;
 
 public class SimpleTreeSim extends JFrame {
 
-    private boolean robberChoose = false;
-    private String defaultColor = "white";
-    private String copColor = "green";
-    private String robberColor = "red";
-    private int winTextWidth = 80;
-    private int winTextHeight = 30;
+    //Constants
+    //Color Variables
+    private final boolean robberChoose = false;
+    private final String defaultColor = "white";
+    private final String copColor = "9BED55";
+    private final String robberColor = "ED6555";
+
+    //Win Text Variables
+    private final int winTextWidth = 80;
+    private final int winTextHeight = 30;
+
+    //Geometry Variables
+    private final int radius = 300;
+
+    //Variables
+    //Win Text Variables
     private mxCell winText = null;
+
 
     public SimpleTreeSim(){
 
         JGraphXAdapter<String, DefaultEdge> jgxAdapter;
         SimpleGraph<String, DefaultEdge> graph =
                 new SimpleGraph<String, DefaultEdge>(DefaultEdge.class);
-
 
         graph.addVertex("v1");
         graph.addVertex("v2");
@@ -50,7 +62,21 @@ public class SimpleTreeSim extends JFrame {
         graph.addEdge("v3", "v8");
 
 
-        jgxAdapter = new JGraphXAdapter <String, DefaultEdge>(graph);
+        jgxAdapter = new JGraphXAdapter <String, DefaultEdge>(graph) {
+            @Override
+            public boolean isCellSelectable(Object cell){
+                mxCell c = (mxCell) cell;
+                if(c.isEdge()){
+                    return false;
+                }
+                return super.isCellSelectable(cell);
+            }
+        };
+
+        mxRectangle r = new mxRectangle();
+        r.setRect(0,0,1000,750);
+        jgxAdapter.setMinimumGraphSize(r);
+
         mxGraphComponent graphComponent = new mxGraphComponent(jgxAdapter);
         mxGraphModel graphModel  =       (mxGraphModel)graphComponent.getGraph().getModel();
         Collection<Object> cells =  graphModel.getCells().values();
@@ -64,6 +90,7 @@ public class SimpleTreeSim extends JFrame {
         initializeVertices(jgxAdapter);
 
         mxCircleLayout layout = new mxCircleLayout(jgxAdapter);
+        layout.setRadius(radius);
         layout.execute(jgxAdapter.getDefaultParent());
 
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
@@ -112,6 +139,10 @@ public class SimpleTreeSim extends JFrame {
         Object[] vertices = jgraphx.getChildVertices(jgraphx.getDefaultParent());
         for (Object v : vertices){
             mxCell cell = (mxCell) v;
+            mxGeometry geo = new mxGeometry();
+            geo.setHeight(25);
+            geo.setWidth(25);
+            cell.setGeometry(geo);
             jgraphx.setCellStyles(mxConstants.STYLE_FILLCOLOR, defaultColor, new Object[]{cell});
         }
     }

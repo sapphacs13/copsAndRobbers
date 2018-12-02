@@ -24,17 +24,19 @@ import org.jgrapht.util.SupplierUtil;
 public class SimplePetersenSim extends JFrame {
 
     //Constants
-    //initial state variables
+    //Initial state variables
     private final int numCops = 3;
-    //color variables
+    //Color Variables
     private final String defaultColor = "white";
-    private final String copColor = "green";
-    private final String robberColor = "red";
+    private final String copColor = "9BED55";
+    private final String robberColor = "ED6555";
     private final String nullString = "null";
     private final String styleColor="fillColor=";
     //Win Text Variables
     private final int winTextWidth = 80;
     private final int winTextHeight = 30;
+
+    //Geometry Variables
     private final int radius = 300;
 
     //Variables
@@ -45,7 +47,6 @@ public class SimplePetersenSim extends JFrame {
     private String nextColor = nullString;
     //win text variables
     private mxCell winText = null;
-
 
     public SimplePetersenSim(){
 

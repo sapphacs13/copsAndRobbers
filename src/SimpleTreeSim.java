@@ -4,15 +4,16 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxUtils;
 import java.util.Collection;
+import java.util.function.Supplier;
 import javax.swing.JFrame;
 
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
-public class GraphTest extends JFrame {
+public class SimpleTreeSim extends JFrame {
 
-    public GraphTest(){
+    public SimpleTreeSim(){
 
         JGraphXAdapter<String, DefaultEdge> jgxAdapter;
         SimpleGraph<String, DefaultEdge> graph =
@@ -23,11 +24,18 @@ public class GraphTest extends JFrame {
         graph.addVertex("v2");
         graph.addVertex("v3");
         graph.addVertex("v4");
+        graph.addVertex("v5");
+        graph.addVertex("v6");
+        graph.addVertex("v7");
+        graph.addVertex("v8");
 
         graph.addEdge("v1", "v2");
-        graph.addEdge("v2","v3");
+        graph.addEdge("v1","v3");
         graph.addEdge("v3", "v4");
-        graph.addEdge("v4", "v1");
+        graph.addEdge("v4", "v5");
+        graph.addEdge("v4", "v6");
+        graph.addEdge("v4", "v7");
+        graph.addEdge("v3", "v8");
 
 
         jgxAdapter = new JGraphXAdapter <String, DefaultEdge>(graph);
@@ -61,7 +69,7 @@ public class GraphTest extends JFrame {
 
     public static void main(String[] args) {
 
-        GraphTest g = new GraphTest();
+        SimpleTreeSim g = new SimpleTreeSim();
 
         g.setTitle(" undirected graph ");
         g.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
